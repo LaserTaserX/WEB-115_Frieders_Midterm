@@ -9,20 +9,21 @@ function calculateBudget() {
 
         loan = parseFloat(loanAmnt);
         downPcnt = parseFloat(downPmnt);
-        term = parseInt(loanTerm);
+        theTerm = parseInt(loanTerm);
 
-        if (isNaN(loan) || isNaN(downPcnt) || isNaN(term)) {
+        if (isNaN(loan) || isNaN(downPcnt) || isNaN(theTerm)) {
             throw "Invalid input! Please enter numeric values.";
         }
 
         let downDec = downPcnt / 100
         let down = downDec * loan
+        let term = theTerm * 12
 
         let principal = loan - down
         let annualRate = 5.75
         let monthlyInterestRate = annualRate / 12
-        let monthlyPayment = ((monthlyInterestRate * principal) / (1 - Math.pow(1 + monthlyInterestRate, -term))).toFixed(2);
-        let totalInterestPaid = (monthlyPayment * (term*12)) - principal
+        let monthlyPayment = ((monthlyInterestRate * principal) / (1 - Math.pow(1 + monthlyInterestRate, -(term)))).toFixed(2);
+        let totalInterestPaid = (monthlyPayment * (term)) - principal
         let totalLoanCost = principal + totalInterestPaid
 
 
